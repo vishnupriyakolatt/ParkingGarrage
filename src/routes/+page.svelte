@@ -1,1 +1,4 @@
-<h1>welcome</h1>
+<script>
+    import Main from '../components/Main.svelte'
+</script>
+<Main/>
