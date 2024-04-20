@@ -1,10 +1,10 @@
 <script>
     import axios from 'axios';
-
+    import Swal from 'sweetalert2';
+    import { goto } from '$app/navigation';
 
     let slotNumber = '';
     let carNumber = '';
-    let date = '';
     let startTime = '';
     let endTime = '';
     let message = '';
@@ -16,18 +16,50 @@
                 slotno: slotNumber,
                 stime: startTime,
                 etime: endTime
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
 
             console.log(response);
             const data = response.data;
 
             message = data.msg;
+
+            if (response.status === 200) {
+                // Assuming successful response, trigger success SweetAlert
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Form submitted successfully.',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Redirect to homepage
+                        goto('/');
+                    }
+                });
+            } else {
+                // Display error SweetAlert
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Failed to save booking. Please try again later.',
+                    confirmButtonText: 'OK'
+                });
+            }
         } catch (error) {
             console.error('Error submitting form:', error);
-            message = 'An error occurred while submitting the form.';
+       
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: 'An error occurred while submitting the form. Please try again later.',
+                confirmButtonText: 'OK'
+            });
         }
     };
- 
 </script>
 
 <section class="py-20 lg:py-22 flex flex-col gap-24" id="projects">
@@ -52,11 +84,11 @@
                         <div class="flex flex-row gap-4 items-center">
                             <label class="label flex flex-col items-start">
                                 <span class="text-black">Start time (In hour)</span>
-                                <input bind:value={startTime} class="input border-black rounded-md mt-1  text-black" type="number" />
+                                <input bind:value={startTime} class="input border-black rounded-md mt-1 text-black" type="number" />
                             </label>
                             <label class="label flex flex-col items-start">
                                 <span class="text-black">End time (In hour)</span>
-                                <input bind:value={endTime} class="input border-black rounded-md mt-1  text-black" type="number" />
+                                <input bind:value={endTime} class="input border-black rounded-md mt-1 text-black" type="number" />
                             </label>
                         </div>
                     
@@ -66,10 +98,13 @@
                     
                 </form>
                 {#if message}
-                    <p class="text-center text-xl mt-4">{message}</p>
+                    <div class="relative flex flex-col min-w-0 break-words dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-2xl bg-clip-border">
+                        <div class="flex-auto p-6 text-center">
+                            <p>Successfully Booked your Parking slot</p>
+                        </div>
+                    </div>
                 {/if}
             </div>
         </div>
     </div>
 </section>
-

@@ -1,7 +1,7 @@
 <script>
-  
+    import { onMount } from "svelte";
     import axios from 'axios';
-import { goto }from '$app/navigation'
+import {goto} from '$app/navigation'
 
     let email = '';
     let carNumber = '';
@@ -21,10 +21,11 @@ import { goto }from '$app/navigation'
             console.log(response);
             const data = response.data;
             console.log(data);
-goto('/Confirmslot')
+
             message = data.msg;
 
-
+          
+            goto('/Confirmslot');
         } catch (error) {
             console.error('Error submitting form:', error);
             message = 'An error occurred while submitting the form.';
@@ -36,7 +37,7 @@ goto('/Confirmslot')
     // });
 </script>
   
-<section class="py-20 lg:py-32 flex flex-col gap-5" id="projects">
+<section class="py-20 lg:py-32 flex flex-col gap-24" id="projects">
     <div class="flex flex-col gap-2 text-center">
       <h6 class="text-large sm:text-xl md:text-2xl">Don't waste your time anymore.</h6>
       <h3 class="font-semibold text-3xl sm:text-4xl md:text-5xl">
