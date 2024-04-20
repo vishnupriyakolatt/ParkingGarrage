@@ -1,4 +1,6 @@
 <script>
-    import Main from '../components/Main.svelte'
+    import App from '../app.svelte'
+
 </script>
-<Main/>
+
+<App/>

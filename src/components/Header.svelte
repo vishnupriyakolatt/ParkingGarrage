@@ -1,11 +1,10 @@
-<!-- Header.svelte -->
 
 <script>
 
   </script>
   
   <header class="flex items-center justify-center">
-    <img src="https://thumbs.dreamstime.com/b/parking-space-garage-logo-isolated-dark-background-simple-vector-249497906.jpg" alt="Logo" class="w-64 h-60 mr-4">
+    <img src="https://thumbs.dreamstime.com/b/parking-space-garage-logo-isolated-dark-background-simple-vector-249497906.jpg" alt="Logo" class="w-44 h-40 mr-4">
     <h1 class="font-large" style="margin-top: 10px; font-weight: bold;">
       PARKIOslot
     </h1>
